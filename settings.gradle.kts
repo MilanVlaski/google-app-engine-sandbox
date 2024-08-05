@@ -1,0 +1,4 @@
+
+
+rootProject.name="gae-starter"
+
