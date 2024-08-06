@@ -1,0 +1,2 @@
+runtime: java21
+entrypoint: java -Xmx64m -jar gae-sbx.jar
