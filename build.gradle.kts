@@ -1,3 +1,5 @@
+import groovy.xml.dom.DOMCategory.attributes
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
@@ -32,6 +34,18 @@ dependencies {
 application {
     mainClass = "com.akimi.ApplicationKt"
 }
+
+tasks.shadowJar {
+    archiveBaseName.set("gae-sbx") // Customize the name if needed
+    archiveClassifier.set("") // This ensures no classifier is added
+    archiveVersion.set("") // This ensures no version is added
+    manifest {
+        attributes(
+            "Main-Class" to "com.akimi.ApplicationKt" // Specify your main class here
+        )
+    }
+}
+
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
 }
