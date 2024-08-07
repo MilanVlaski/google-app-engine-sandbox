@@ -27,6 +27,13 @@ dependencies {
 
     implementation("com.google.cloud:google-cloud-secretmanager:2.0.2")
 
+    implementation("com.auth0:java-jwt:3.19.1")
+    implementation("com.auth0:jwks-rsa:0.22.1")
+    implementation("com.google.apis:google-api-services-oauth2:v2-rev20200213-2.0.0")
+    implementation("com.google.api-client:google-api-client:2.6.0")
+    implementation("com.google.apis:google-api-services-walletobjects:v1-rev20240220-2.0.0")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.24.0")
+
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
