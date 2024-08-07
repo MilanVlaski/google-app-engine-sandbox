@@ -44,7 +44,7 @@ tasks.shadowJar {
             "Main-Class" to "com.akimi.ApplicationKt" // Specify your main class here
         )
     }
-    destinationDirectory.set(file("$rootDir"))
+    destinationDirectory.set(file("$rootDir/lib"))
 }
 
 java {

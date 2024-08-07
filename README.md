@@ -1,7 +1,7 @@
 # Steps to run deploy to Google App Engine
 1. To test your app locally, do command: `./gradlew run` and check localhost:8080 in your browser
-2. To build the .jar that will be deployed to Google App Engine run: `./gradlew clean build`
-3. To deploy to Google App Engine run: `gcloup app deploy build/libs/gae-sbx.jar`
+2. To build the .jar that will be deployed to Google App Engine run: `./gradlew clean build`. This should create a .jar file in lib directory.
+3. To deploy to Google App Engine, navigate to lib directory and run `gcloud app deploy`
 
 ## Micronaut 4.5.1 Documentation
 
