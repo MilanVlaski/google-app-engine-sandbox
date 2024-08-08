@@ -33,11 +33,15 @@ dependencies {
     implementation("com.google.api-client:google-api-client:2.6.0")
     implementation("com.google.apis:google-api-services-walletobjects:v1-rev20240220-2.0.0")
     implementation("com.google.auth:google-auth-library-oauth2-http:1.24.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
+
 
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("org.mockito:mockito-core:5.12.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
 

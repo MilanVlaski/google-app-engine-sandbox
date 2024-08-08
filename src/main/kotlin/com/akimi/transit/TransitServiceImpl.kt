@@ -23,7 +23,9 @@ import kotlin.collections.HashMap
  */
 @Singleton
 class TransitServiceImpl : TransitService {
-    private val googleCredentials: GoogleCredentials? = GetSecret.accessSecret("orbital-anchor-431604-n2", "CREDENTIALS_PATH")?.let { googleCredentials(it) }
+    private val googleCredentials: GoogleCredentials? = GetSecret
+        .accessSecret("eth-sbx", "GOOGLE_APPLICATION_CREDENTIALS")
+        ?.let { googleCredentials(it) }
     private val walletObjects: Walletobjects? = googleCredentials?.let { authenticate("TPS", it) }
 
 
@@ -128,4 +130,8 @@ class TransitServiceImpl : TransitService {
                         )
                 )
         )
+
+    override fun patchObject(objectId: String, patchedBody: TransitObject): String {
+        TODO("Not yet implemented")
+    }
 }

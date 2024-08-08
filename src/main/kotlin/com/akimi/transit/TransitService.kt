@@ -9,4 +9,5 @@ interface TransitService {
     fun createObject(issuerId: String, className: String, passengerName: String, email: String): TransitObject?
     fun generateJWTToken(transitObject: TransitObject): String?
     fun staticObject(objectSuffix: String, passengerName: String, className: String, issuerId: String): TransitObject
+    fun patchObject(objectId: String, patchedBody: TransitObject): String
 }
