@@ -1,0 +1,20 @@
+{
+  signature=MEUCIBQU6wT1wanTcKiaiIqgoM5eL1hY741ZWUC/buCqJlvdAiEA8vweGFA+TBIcFyPnB7Mlb8W41uYC2Jg8wKd7GqJ1RFE=,
+  intermediateSigningKey={
+  signedKey={
+  "keyValue": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcaNMZRrGmMB2c9lXvaBX+nimMME/hWb7nztHtF6m41au18X0KkkSLbJ3xty0ASHoyQKXcWarS9GNrqbA9gj+YA\u003d\u003d",
+  "keyExpiration": "1723666257000",
+},
+signatures=[MEUCIAKrJb6SfblhX98zu+dGRd1KDzv5i8wsSz2UtMIb6PMQAiEAsletRJ0m/mlgh+Hi8/GZO5X3WWz9d+h5mk9gyLAJ6pQ=]},
+protocolVersion=ECv2SigningOnly,
+signedMessage= {
+"classId": "3388000000022335801.eth-motics-with-link",
+"objectIds":["3388000000022335801.5d1ef42c-c9f4-4d29-b8b6-5dfc0de351b9"],
+"eventType": "activate",
+"expTimeMillis": 1723008949963,
+"count": 1,
+"nonce": "b6fe65e5-4132-4588-8fcc-b04648f2292c",
+"deviceContext": "ad332b8b-1337-4c94-a46e-1ecfb6561377"
+}
+
+
