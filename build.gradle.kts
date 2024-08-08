@@ -2,6 +2,7 @@ import groovy.xml.dom.DOMCategory.attributes
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23" // Add this line
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
     id("com.google.devtools.ksp") version "1.9.23-1.0.19"
     id("com.github.johnrengelman.shadow") version "8.1.1"
@@ -34,7 +35,7 @@ dependencies {
     implementation("com.google.apis:google-api-services-walletobjects:v1-rev20240220-2.0.0")
     implementation("com.google.auth:google-auth-library-oauth2-http:1.24.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
