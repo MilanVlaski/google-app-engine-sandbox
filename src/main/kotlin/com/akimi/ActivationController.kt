@@ -22,10 +22,10 @@ class ActivationController(@Inject val transitService: TransitService) {
     private val mapper = ObjectMapper().registerKotlinModule()
 
     @Post("/")
-    fun activateTicket(@Body body: Map<String, Any>): HttpResponse<Any> {
+    fun activateTicket(@Body body: ActivationRequest): HttpResponse<Any> {
         log.info("Activating ticket with body: $body")
         try {
-            val objectId = mapper.readTree(mapper.writeValueAsString(body)).get("signedMessage").get("objectIds").get(0).asText()
+            val objectId = body.signedMessage.objectIds[0]
 
             val hexAppData =
                 "9E" + "8180" + "00".repeat(128) +
