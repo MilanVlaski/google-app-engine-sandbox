@@ -22,10 +22,10 @@ class ActivationController(@Inject val transitService: TransitService) {
     private val mapper = ObjectMapper().registerKotlinModule()
 
     @Post("/")
-    fun activateTicket(@Body body: ActivationRequest): HttpResponse<Any> {
+    fun activateTicket(@Body body: String): HttpResponse<Any> {
         log.info("Activating ticket with body: $body")
         try {
-            val objectId = body.signedMessage.objectIds[0]
+//            `val objectId = body.signedMessage.objectIds[0]
 
             val hexAppData =
                 "9E" + "8180" + "00".repeat(128) +
@@ -33,11 +33,18 @@ class ActivationController(@Inject val transitService: TransitService) {
                         "7F21" + "81C8" + "00".repeat(200) +
                         "42" + "08" + "00".repeat(8)
 
-            transitService.patchObject(objectId, moticsPatchedObject(hexAppData))
+//            transitService.patchObject(objectId, moticsPatchedObject(hexAppData))
         } catch (e: Exception) {
             log.error("Error activating ticket ", e)
         }
         return HttpResponse.ok()
+    }
+
+    companion object {
+
+        fun extractObjectId(body: String): String {
+            return ""
+        }
     }
 
     @Serdeable

@@ -1,7 +1,6 @@
 package com.akimi
 
 import io.micronaut.serde.annotation.Serdeable
-import io.micronaut.serde.config.annotation.SerdeConfig.SerError
 
 @Serdeable
 data class ActivationRequest(
@@ -18,8 +17,8 @@ data class ActivationRequest(
 
     @Serdeable
     class SignedKey(
-        val keyValue: String,
-        val keyExpiration: String
+        val keyValue: Long,
+        val keyExpiration: Long
     )
 
     @Serdeable
@@ -27,7 +26,7 @@ data class ActivationRequest(
         val classId: String,
         val objectIds: List<String>,
         val eventType: String,
-        val expTimeMillis: Int,
+        val expTimeMillis: Long,
         val count: Int,
         val nonce: String,
         val deviceContext: String
