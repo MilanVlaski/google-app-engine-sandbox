@@ -12,6 +12,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Post
 import io.micronaut.serde.annotation.Serdeable
 import jakarta.inject.Inject
+import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 
 @Controller("/activateTicket")
@@ -41,9 +42,9 @@ class ActivationController(@Inject val transitService: TransitService) {
     }
 
     companion object {
-
         fun extractObjectId(body: String): String {
-            return ""
+            val data = Json.decodeFromString<Data>(body)
+            return Json.decodeFromString<SignedMessage>(data.signedMessage).objectIds[0]
         }
     }
 
