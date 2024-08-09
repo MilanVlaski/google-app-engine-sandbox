@@ -1,5 +1,6 @@
 package com.akimi.transit
 
+import com.akimi.Credentials
 import com.akimi.GetSecret
 import com.akimi.authenticate
 import com.akimi.googleCredentials
@@ -22,12 +23,12 @@ import kotlin.collections.HashMap
  * interface)
  */
 @Singleton
-class TransitServiceImpl : TransitService {
-    private val googleCredentials: GoogleCredentials? = GetSecret
-        .accessSecret("eth-sbx", "GOOGLE_APPLICATION_CREDENTIALS")
-        ?.let { googleCredentials(it) }
+class TransitServiceImpl(credentials: Credentials) : TransitService {
+    private val googleCredentials: GoogleCredentials = credentials.byteArray()
+        .let { googleCredentials(it) }
     private val walletObjects: Walletobjects? = googleCredentials?.let { authenticate("TPS", it) }
-
+//    GetSecret
+//    .accessSecret("eth-sbx", "GOOGLE_APPLICATION_CREDENTIALS")
 
     override fun createObject(issuerId: String, className: String, passengerName: String, email: String): TransitObject? {
         val objectSuffix = email.replace("@", "_") + UUID.randomUUID().toString()

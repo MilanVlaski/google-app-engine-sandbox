@@ -45,7 +45,6 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
-
 application {
     mainClass = "com.akimi.ApplicationKt"
 }

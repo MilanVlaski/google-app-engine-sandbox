@@ -1,6 +1,7 @@
 package com.akimi
 
 import com.akimi.transit.TransitService
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.api.services.walletobjects.model.ActivationStatus
@@ -26,7 +27,7 @@ class ActivationController(@Inject val transitService: TransitService) {
     fun activateTicket(@Body body: String): HttpResponse<Any> {
         log.info("Activating ticket with body: $body")
         try {
-//            `val objectId = body.signedMessage.objectIds[0]
+            val objectId = extractObjectId(body)
 
             val hexAppData =
                 "9E" + "8180" + "00".repeat(128) +
@@ -34,9 +35,9 @@ class ActivationController(@Inject val transitService: TransitService) {
                         "7F21" + "81C8" + "00".repeat(200) +
                         "42" + "08" + "00".repeat(8)
 
-//            transitService.patchObject(objectId, moticsPatchedObject(hexAppData))
+            transitService.patchObject(objectId, moticsPatchedObject(hexAppData))
         } catch (e: Exception) {
-            log.error("Error activating ticket ", e)
+            log.error("Error activating ticket $e", e)
         }
         return HttpResponse.ok()
     }
