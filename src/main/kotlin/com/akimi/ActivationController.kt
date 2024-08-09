@@ -55,12 +55,18 @@ class ActivationController(@Inject val transitService: TransitService) {
         val deviceContext: String? // base64 encoded SCE_ID
     )
 
-    fun moticsPatchedObject(hexAppData: String): TransitObject = TransitObject().setActivationStatus(ActivationStatus().setState("ACTIVATED")).setRotatingBarcode(
-        RotatingBarcode().setType("AZTEC")
-    ).set("valuePattern", "{vdv_barcode}").set("deviceEntitlementSupport", object {
-        val vdvEntitlementDetails = object {
-            val applicationData = hexAppData
-        }
-    })
+    fun moticsPatchedObject(hexAppData: String): TransitObject = TransitObject()
+        .setActivationStatus(ActivationStatus().setState("ACTIVATED"))
+        .setRotatingBarcode(
+            RotatingBarcode().setType("AZTEC")
+                .set("valuePattern", "{vdv_barcode}")
+                .set(
+                    "deviceEntitlementSupport", mapOf (
+                        "vdvEntitlementDetails" to mapOf(
+                            "applicationData" to hexAppData
+                        )
+                    )
+                )
+        )
 
 }
