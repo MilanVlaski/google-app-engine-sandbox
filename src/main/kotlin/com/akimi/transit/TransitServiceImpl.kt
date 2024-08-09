@@ -1,7 +1,6 @@
 package com.akimi.transit
 
 import com.akimi.Credentials
-import com.akimi.GetSecret
 import com.akimi.authenticate
 import com.akimi.googleCredentials
 import com.auth0.jwt.JWT
@@ -14,7 +13,6 @@ import com.google.auth.oauth2.ServiceAccountCredentials
 import jakarta.inject.Singleton
 import java.security.interfaces.RSAPrivateKey
 import java.util.*
-import kotlin.collections.HashMap
 
 /**
  * Potential names: GoogleTransitService, GoogleWalletService, WalletService.
@@ -24,16 +22,13 @@ import kotlin.collections.HashMap
  */
 @Singleton
 class TransitServiceImpl(credentials: Credentials) : TransitService {
-    private val googleCredentials: GoogleCredentials = credentials.byteArray()
-        .let { googleCredentials(it) }
-    private val walletObjects: Walletobjects? = googleCredentials?.let { authenticate("TPS", it) }
-//    GetSecret
-//    .accessSecret("eth-sbx", "GOOGLE_APPLICATION_CREDENTIALS")
+    private val googleCredentials: GoogleCredentials = googleCredentials(credentials.byteArray())
+    private val walletObjects: Walletobjects = authenticate("TPS", googleCredentials)
 
     override fun createObject(issuerId: String, className: String, passengerName: String, email: String): TransitObject? {
         val objectSuffix = email.replace("@", "_") + UUID.randomUUID().toString()
         try {
-            walletObjects?.transitobject()?.get(String.format("%s.%s", issuerId, objectSuffix))?.execute()
+            walletObjects.transitobject()?.get(String.format("%s.%s", issuerId, objectSuffix))?.execute()
 
             System.out.printf("Object %s.%s already exists!%n", issuerId, objectSuffix)
         } catch (ex: GoogleJsonResponseException) {
@@ -48,7 +43,7 @@ class TransitServiceImpl(credentials: Credentials) : TransitService {
 
         val newObject = staticObject(objectSuffix, passengerName, className, issuerId)
 
-        val response = walletObjects?.transitobject()?.insert(newObject)?.execute()
+        val response = walletObjects.transitobject()?.insert(newObject)?.execute()
 
         return response
     }
@@ -69,7 +64,7 @@ class TransitServiceImpl(credentials: Credentials) : TransitService {
         val algorithm =
             Algorithm.RSA256(
                 null,
-                googleCredentials!!.privateKey as RSAPrivateKey
+                googleCredentials.privateKey as RSAPrivateKey
             )
         val token = JWT.create().withPayload(claims).sign(algorithm)
 
@@ -133,6 +128,6 @@ class TransitServiceImpl(credentials: Credentials) : TransitService {
         )
 
     override fun patchObject(objectId: String, patchedBody: TransitObject): String {
-        TODO("Not yet implemented")
+        return walletObjects.transitobject().patch(objectId, patchedBody).execute().id
     }
 }
